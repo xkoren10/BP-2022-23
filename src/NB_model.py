@@ -1,6 +1,6 @@
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.metrics import classification_report
-from sklearn.model_selection import train_test_split
+from sklearn.decomposition import PCA
 from sklearn.pipeline import Pipeline
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfTransformer
@@ -10,15 +10,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-def nb_model(news_tfidf,news):
-    NB = MultinomialNB().fit(news_tfidf, news['True/Fake'])
-    predictions_NB = NB.predict(news_tfidf)
-
-    print('NB Predictions')
-    print(classification_report(news['True/Fake'], predictions_NB))
-
-    news_train, news_test, text_train, text_test = train_test_split(news['Article'], news['True/Fake'], test_size=0.3)
-
+def nb_model(news_train, news_test, text_train, text_test):
 
     pipeline1 = Pipeline([
         ('bow', CountVectorizer(analyzer=pt.process_text)),  # strings to token integer counts
@@ -32,11 +24,20 @@ def nb_model(news_tfidf,news):
     print('NB - test')
     print(classification_report(predictions_NB, text_test))
 
+    #pca = PCA(n_components=2).fit(news_test)
+    #data2D = pca.transform(news_test)
+    #PCA_df = pd.DataFrame(data2D)
+    #PCA_df['cluster'] = predictions_NB
+    #PCA_df.columns = ['x1', 'x2', 'cluster']
+    #sns.scatterplot(data=PCA_df, x='x1', y='x2', hue='cluster', legend="full", alpha=0.5)
+    #plt.show()
+
+
     cm = confusion_matrix(text_test, predictions_NB)
     class_label = [0, 1]
     df_cm = pd.DataFrame(cm, index=class_label, columns=class_label)
     sns.heatmap(df_cm, annot=True, fmt='d',cmap="crest")
-    plt.title("Confusion Matrix")
+    plt.title("Confusion Matrix - Naive Bayes")
     plt.xlabel("Predicted Label")
     plt.ylabel("True Label")
     plt.show()
