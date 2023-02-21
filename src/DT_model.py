@@ -14,7 +14,7 @@ def dt_model(news_train, news_test, text_train, text_test):
     pipeline3 = Pipeline([
         ('bow', CountVectorizer(analyzer=pt.process_text)),  # strings to token integer counts
         ('tfidf', TfidfTransformer()),  # integer counts to weighted TF-IDF scores
-        ('classifier', DecisionTreeClassifier()),  # train on TF-IDF vectors w/ Naive Bayes classifier
+        ('classifier', DecisionTreeClassifier()),  # train on TF-IDF vectors w/ Decision Tree classifier
     ])
 
     pipeline3.fit(news_train, text_train)

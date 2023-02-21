@@ -15,7 +15,7 @@ def sv_model(news_train, news_test, text_train, text_test):
     pipeline2 = Pipeline([
         ('bow', CountVectorizer(analyzer=pt.process_text)),  # strings to token integer counts
         ('tfidf', TfidfTransformer()),  # integer counts to weighted TF-IDF scores
-        ('classifier', SVC(C=1.0, kernel='linear', gamma='auto')),  # train on TF-IDF vectors w/ Naive Bayes classifier
+        ('classifier', SVC(C=1.0, kernel='linear', gamma='auto')),  # train w/ Support Vectors classifier
     ])
 
     pipeline2.fit(news_train, text_train)

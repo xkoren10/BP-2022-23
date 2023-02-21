@@ -24,15 +24,6 @@ def nb_model(news_train, news_test, text_train, text_test):
     print('NB - test')
     print(classification_report(predictions_NB, text_test))
 
-    #pca = PCA(n_components=2).fit(news_test)
-    #data2D = pca.transform(news_test)
-    #PCA_df = pd.DataFrame(data2D)
-    #PCA_df['cluster'] = predictions_NB
-    #PCA_df.columns = ['x1', 'x2', 'cluster']
-    #sns.scatterplot(data=PCA_df, x='x1', y='x2', hue='cluster', legend="full", alpha=0.5)
-    #plt.show()
-
-
     cm = confusion_matrix(text_test, predictions_NB)
     class_label = [0, 1]
     df_cm = pd.DataFrame(cm, index=class_label, columns=class_label)
