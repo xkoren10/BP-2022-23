@@ -54,7 +54,7 @@ arguments = parser.parse_args()
 # label = file['True/Fake']
 
 
-file = pd.read_csv("datasets/sk/dataset_sk_csv_utf.csv", sep=';')
+file = pd.read_csv("../datasets/sk/dataset_sk_csv_utf.csv", sep=';')
 
 if 'text' and 'title' in file.columns:
     file.dropna(subset=['text', 'title'], inplace=True)
