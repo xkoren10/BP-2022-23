@@ -1,0 +1,11 @@
+pandas
+scikit-learn
+matplotlib
+seaborn
+nltk
+tensorflow
+keras
+scikeras
+dill
+newspaper3k
+lime
